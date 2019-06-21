@@ -1,17 +1,17 @@
 package com.example.imagerecognition;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class JGson {
+public class JGson  {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("link")
+    @SerializedName("tag")
     @Expose
-    private String mLink;
-
-    public String toString() {
+    private String tag;
+    public String getName() {
         return name;
     }
 }

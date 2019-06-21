@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import java.nio.file.Files;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 
 import retrofit2.Callback;
@@ -89,12 +91,26 @@ public class MainActivity extends AppCompatActivity {
         RequestBody requestBody = RequestBody
                 .create(MediaType.parse("application/octet-stream"), buf);
         //Call <Void> mediaPost = uploadAPIs.uploadBinaryFile(requestBody);
+
         Call call = uploadAPIs.uploadBinaryFile(requestBody);
+        //jgson = call.execute().body();
         call.enqueue(new Callback <JGson> () {
             @Override
             public void onResponse(Call <JGson> call, Response <JGson> response) {
-                JGson jgson = new JGson();
-                tv.setText(jgson.toString());
+                //Log.e(jgson.toString(),"HHHHHHHHHHHHH");
+                JGson jgson = response.body();
+                if (response.isSuccessful()){
+
+
+                        Toast.makeText(MainActivity.this, "success", Toast.LENGTH_LONG).show();
+
+                } else{
+                    Toast.makeText(MainActivity.this, "fail", Toast.LENGTH_LONG).show();
+                    // check error.
+                }
+
+                //tv.setText(jgson.getName());
+                //Toast.makeText(MainActivity.this, jgson.getName(), Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call <JGson> call, Throwable t) {
