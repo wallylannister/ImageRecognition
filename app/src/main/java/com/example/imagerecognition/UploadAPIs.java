@@ -11,10 +11,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 public interface UploadAPIs {
-
     @POST ("/service/buildings/recognize/")
-    @Headers({"Content-Type: application/octet-stream",
-            "Content-Disposition: attachment ; filename ="filename.jpg" "
+    @Headers({
+            "Content-Type: application/octet-stream",
+            "Content-Disposition: attachment; filename=\"filename.jpg\""
     })
     //Call<ResponseBody> uploadImage(@Part MultipartBody.Part file, @Part RequestBody requestBody);
     Call <JGson> uploadBinaryFile(@Body RequestBody body);
